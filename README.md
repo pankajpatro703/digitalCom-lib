@@ -1,1 +1,1 @@
-# simplifiedDES
+# Data Compression and Encryption algorithms
