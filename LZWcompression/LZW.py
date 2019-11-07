@@ -52,9 +52,9 @@ def uncompress(compressed,initial):
                     w = c
                     break
                 if(j==len(data)):
-                        data+=wc
-                        j-=len(wc)
-                        flag=len(wc)
+                    data+=wc
+                    j-=len(wc)
+                    flag=len(wc)
     return data
 
 #data = input("Enter a string: ")
