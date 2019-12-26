@@ -59,7 +59,7 @@ def uncompress(compressed_list,initial_list):
                     dict_size += 1
                     w = c
                     break
-                if(j == len(data)):
+                if(j == len(data_string)):
                     data_string += wc
                     j -= len(wc)
                     flag = len(wc)
