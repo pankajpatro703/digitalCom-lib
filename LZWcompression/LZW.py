@@ -9,8 +9,8 @@ def compress(uncompressed_string):
     This method calculates the compressed data and creates the initial table.
     :param uncompressed_string: original string to be compressed
     :return tuple[0] compressed_string: list with final compressed data
-    :return initial_list: initial alphabetic list from original string
-    :return dictionary: encoding dictionary obtained
+    :return tuple[1] initial_list: initial alphabetic list from original string
+    :return tuple[2] dictionary: encoding dictionary obtained
     '''
     dictionary = {}
     l = []
