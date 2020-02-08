@@ -4,7 +4,7 @@
 #  Licensed under GPL v3  #
 ###########################
 
-SIZE=9      #for a 9x9 sized playfair square
+SIZE = 9      #for a 9x9 sized playfair square
 
 #orglist = [chr(i) for i in range(32,127)] #useful ASCII codes
 orglist = [chr(i) for i in range(32+33,32+59)] + \
