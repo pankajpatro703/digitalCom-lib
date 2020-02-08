@@ -1,9 +1,17 @@
-#Module to implement LZW compression and decompression algorithm
+#LZW Compression and Decompression algorithm
+###########################
+# @Author: pankajpatro703 #
+#  Licensed under GPL v3  #
+###########################
 
 def compress(uncompressed_string):
-    '''This method takes plain string and returns the compressed data
-       along with the order of symbols in the table and the dictionary
-       created'''
+    '''
+    This method calculates the compressed data and creates the initial table.
+    :param uncompressed_string: original string to be compressed
+    :return tuple[0] compressed_string: list with final compressed data
+    :return initial_list: initial alphabetic list from original string
+    :return dictionary: encoding dictionary obtained
+    '''
     dictionary = {}
     l = []
     for i in uncompressed_string:
@@ -30,9 +38,12 @@ def compress(uncompressed_string):
     return compressed_list, initial_list, dictionary
 
 def uncompress(compressed_list,initial_list):
-    '''This method takes the compressed data in the form of a list of integers
-       and the correct sequence of table elements created during compression and
-       returns the decompressed data'''
+    '''
+    This method decompresses the compressed data.
+    :param compressed_list: list of integers of compressed data
+    :param initial_list: list of characters from original data
+    :return data_string: string obtained after decompression 
+    '''
     dictionary = {}
     data_string = ""
     for i in range(len(initial_list)):
@@ -64,3 +75,16 @@ def uncompress(compressed_list,initial_list):
                     j -= len(wc)
                     flag = len(wc)
     return data_string
+
+if (__name__ == '__main__'):
+    data = 'This is the data to be compressed'
+    compressed, initial, dictionary = compress(data)
+    print("Compressed data is: ")
+    print(compressed)
+    print("Dictionary used for encoding: ")
+    print(dictionary)
+    print("Initial characters in the dictionary: ")
+    print(initial)
+    decoded=uncompress(compressed,initial)
+    print("Decompressed data is: ")
+    print(decoded)
