@@ -135,7 +135,7 @@ def playfairEncrypt(plaintext, square):
 def playfairDecrypt(ciphertext, square):
     '''
     This method decrypts the ciphertext using playfair cipher.
-    :param ciphertext: original string
+    :param ciphertext: ciphered string
     :param square: square list of characters obtained from key
     :return deciphertext: deciphered text after decryption
     '''
