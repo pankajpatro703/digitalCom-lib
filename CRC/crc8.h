@@ -26,9 +26,9 @@
 #include<stdint.h>
 
 struct algorithm {
-	/*
-	This structure defines the parameters required for algorithms used for different applications.
-	*/
+    /*
+    This structure defines the parameters required for algorithms used for different applications.
+    */
     uint8_t poly, init, xorOut;
     bool refIn, refOut;
 };
@@ -46,11 +46,11 @@ struct algorithm CRC8_ROHC      = {.poly=0x07, .init=0xFF, .refIn=true,  .refOut
 struct algorithm CRC8_WCDMA     = {.poly=0x9B, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
 
 uint8_t reverseBits(uint8_t num) {
-	/*
-	This function returns the 8-bit number obtained by reversing the bit sequence of input number.
-	:param uint8_t num: original 8-bit integer to be reversed
-	:return uint8_t revnum: reversed 8-bit number 
-	*/ 
+    /*
+    This function returns the 8-bit number obtained by reversing the bit sequence of input number.
+    :param uint8_t num: original 8-bit integer to be reversed
+    :return uint8_t revnum: reversed 8-bit number 
+    */ 
     uint8_t  NoOfBits = sizeof(num) * 8;
     uint8_t revnum = 0, i, temp; 
     for (i = 0; i < NoOfBits; i++) { 
@@ -62,12 +62,12 @@ uint8_t reverseBits(uint8_t num) {
 } 
 
 uint8_t getCRC(char *s, struct algorithm algo_struct) {
-	/*
-	This function calculates the 8-bit CRC for a given string.
-	:param char *s: string(char array) on which the CRC is to be calculated
-	:param struct algorithm algo_struct: struct defining the algorithm parameters
-	:return uint8_t crc: calculated 8-bit CRC
-	*/
+    /*
+    This function calculates the 8-bit CRC for a given string.
+    :param char *s: string(char array) on which the CRC is to be calculated
+    :param struct algorithm algo_struct: struct defining the algorithm parameters
+    :return uint8_t crc: calculated 8-bit CRC
+    */
     uint8_t d, test, crc = algo_struct.init;
     unsigned int i, j;
     for(i=0; i<strlen(s); i++) {
