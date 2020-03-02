@@ -20,17 +20,16 @@
 ################################
 
 #Different application types and their parameters
-#[poly, init, refIn, refOut, xorOut, check, name]
-CRC8          = [0x07, 0x00, False, False, 0x00, 0xF4]
-CRC8_CDMA2000 = [0x9B, 0xFF, False, False, 0x00, 0xDA]
-CRC8_DARC     = [0x39, 0x00, True, True, 0x00, 0x15]
-CRC8_DVB_S2   = [0xD5, 0x00, False, False, 0x00, 0xBC]
-CRC8_EBU      = [0x1D, 0xFF, True, True, 0x00, 0x97]
-CRC8_I_CODE   = [0x1D, 0xFD, False, False, 0x00, 0x7E]
-CRC8_ITU      = [0x07, 0x00, False, False, 0x55, 0xA1]
-CRC8_MAXIM    = [0x31, 0x00, True, True, 0x00, 0xA1]
-CRC8_ROHC     = [0x07, 0xFF, True, True, 0x00, 0xD0]
-CRC8_WCDMA    = [0x9B, 0x00, True, True, 0x00, 0x25]
+CRC8          = {'poly':0x07, 'init':0x00, 'refIn':False, 'refOut':False, 'xorOut':0x00}
+CRC8_CDMA2000 = {'poly':0x9B, 'init':0xFF, 'refIn':False, 'refOut':False, 'xorOut':0x00}
+CRC8_DARC     = {'poly':0x39, 'init':0x00, 'refIn':True,  'refOut':True,  'xorOut':0x00}
+CRC8_DVB_S2   = {'poly':0xD5, 'init':0x00, 'refIn':False, 'refOut':False, 'xorOut':0x00}
+CRC8_EBU      = {'poly':0x1D, 'init':0xFF, 'refIn':True,  'refOut':True,  'xorOut':0x00}
+CRC8_I_CODE   = {'poly':0x1D, 'init':0xFD, 'refIn':False, 'refOut':False, 'xorOut':0x00}
+CRC8_ITU      = {'poly':0x07, 'init':0x00, 'refIn':False, 'refOut':False, 'xorOut':0x55}
+CRC8_MAXIM    = {'poly':0x31, 'init':0x00, 'refIn':True,  'refOut':True,  'xorOut':0x00}
+CRC8_ROHC     = {'poly':0x07, 'init':0xFF, 'refIn':True,  'refOut':True,  'xorOut':0x00}
+CRC8_WCDMA    = {'poly':0x9B, 'init':0x00, 'refIn':True,  'refOut':True,  'xorOut':0x00}
 
 def getBinary(string):
     '''
@@ -41,8 +40,7 @@ def getBinary(string):
     '''
     res = ''.join(format(ord(i),'b') for i in string)
     res2 = res[::-1]
-    while(len(res2)<8):
-        res2 = res2 + '0'
+    res2 += '0' * (8 - len(res2))
     return (int(res,2), int(res2,2))
 
 def getCRC(data, algo_list):
@@ -52,22 +50,29 @@ def getCRC(data, algo_list):
     :param algo_list: name of application algorithm
     :return crc: calculated integer value of 8-bit crc
     '''
-    crc = algo_list[1]
+    crc = algo_list['init']
     for byte in data:
-        d = getBinary(byte)[0]
-        if(algo_list[2]):
-            d = getBinary(byte)[1]
-        crc = crc ^ d
+        d = getBinary(byte)[1] if algo_list['refIn'] else getBinary(byte)[0]
+        crc ^= d
         for i in range(8):
-            test = crc & 0x80 != 0
+            test = (crc & 0x80) != 0
             crc = (crc<<1) & 0xff
             if(test):
-                crc ^= algo_list[0]
-    if(algo_list[3]):
+                crc ^= algo_list['poly']
+    if(algo_list['refOut']):
         crc = getBinary(chr(crc))[1]
-    crc = crc ^ algo_list[4]
+    crc ^= algo_list['xorOut']
     return crc
 
 if(__name__=='__main__'):
-    print(format(getCRC('Hello. This is the message.', CRC8),'x'))
-    print(getCRC('Hello. This is the message.', CRC8))
+    message = 'Hello. This is the message.'
+    print('8-bit CRC of the message is', format(getCRC(message, CRC8),'02x'))
+    print('8-bit CDMA2000 CRC of the message is', format(getCRC(message, CRC8_CDMA2000),'02x'))
+    print('8-bit DARC CRC of the message is', format(getCRC(message, CRC8_DARC),'02x'))
+    print('8-bit DVB-S2 CRC of the message is', format(getCRC(message, CRC8_DVB_S2),'02x'))
+    print('8-bit EBU CRC of the message is', format(getCRC(message, CRC8_EBU),'02x'))
+    print('8-bit I-code CRC of the message is', format(getCRC(message, CRC8_I_CODE),'02x'))
+    print('8-bit ITU CRC of the message is', format(getCRC(message, CRC8_ITU),'02x'))
+    print('8-bit MAXIM CRC of the message is', format(getCRC(message, CRC8_MAXIM),'02x'))
+    print('8-bit ROHC CRC of the message is', format(getCRC(message, CRC8_ROHC),'02x'))
+    print('8-bit WCDMA CRC of the message is', format(getCRC(message, CRC8_WCDMA),'02x'))
