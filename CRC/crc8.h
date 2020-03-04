@@ -25,7 +25,7 @@
 #include<stdbool.h>
 #include<stdint.h>
 
-struct algorithm {
+struct algorithm8 {
     /*
     This structure defines the parameters required for algorithms used for different applications.
     */
@@ -34,18 +34,18 @@ struct algorithm {
 };
 
 //Different application types and their parameters
-struct algorithm CRC8           = {.poly=0x07, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x00}; 
-struct algorithm CRC8_CDMA2000  = {.poly=0x9B, .init=0xFF, .refIn=false, .refOut=false, .xorOut=0x00}; 
-struct algorithm CRC8_DARC      = {.poly=0x39, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
-struct algorithm CRC8_DVB_S2    = {.poly=0xD5, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x00}; 
-struct algorithm CRC8_EBU       = {.poly=0x1D, .init=0xFF, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
-struct algorithm CRC8_I_CODE    = {.poly=0x1D, .init=0xFD, .refIn=false, .refOut=false, .xorOut=0x00}; 
-struct algorithm CRC8_ITU       = {.poly=0x07, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x55}; 
-struct algorithm CRC8_MAXIM     = {.poly=0x31, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
-struct algorithm CRC8_ROHC      = {.poly=0x07, .init=0xFF, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
-struct algorithm CRC8_WCDMA     = {.poly=0x9B, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
+struct algorithm8 CRC8           = {.poly=0x07, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x00}; 
+struct algorithm8 CRC8_CDMA2000  = {.poly=0x9B, .init=0xFF, .refIn=false, .refOut=false, .xorOut=0x00}; 
+struct algorithm8 CRC8_DARC      = {.poly=0x39, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
+struct algorithm8 CRC8_DVB_S2    = {.poly=0xD5, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x00}; 
+struct algorithm8 CRC8_EBU       = {.poly=0x1D, .init=0xFF, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
+struct algorithm8 CRC8_I_CODE    = {.poly=0x1D, .init=0xFD, .refIn=false, .refOut=false, .xorOut=0x00}; 
+struct algorithm8 CRC8_ITU       = {.poly=0x07, .init=0x00, .refIn=false, .refOut=false, .xorOut=0x55}; 
+struct algorithm8 CRC8_MAXIM     = {.poly=0x31, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
+struct algorithm8 CRC8_ROHC      = {.poly=0x07, .init=0xFF, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
+struct algorithm8 CRC8_WCDMA     = {.poly=0x9B, .init=0x00, .refIn=true,  .refOut=true,  .xorOut=0x00}; 
 
-uint8_t reverseBits(uint8_t num) {
+uint8_t reverseBits8(uint8_t num) {
     /*
     This function returns the 8-bit number obtained by reversing the bit sequence of input number.
     :param uint8_t num: original 8-bit integer to be reversed
@@ -61,19 +61,19 @@ uint8_t reverseBits(uint8_t num) {
     return revnum; 
 } 
 
-uint8_t getCRC(char *s, struct algorithm algo_struct) {
+uint8_t getCRC8(char *s, struct algorithm8 algo_struct) {
     /*
     This function calculates the 8-bit CRC for a given string.
     :param char *s: string(char array) on which the CRC is to be calculated
-    :param struct algorithm algo_struct: struct defining the algorithm parameters
+    :param struct algorithm8 algo_struct: struct defining the algorithm parameters
     :return uint8_t crc: calculated 8-bit CRC
     */
     uint8_t d, test, crc = algo_struct.init;
     unsigned int i, j;
     for(i=0; i<strlen(s); i++) {
-        d = algo_struct.refIn ? reverseBits(s[i]) : s[i];
+        d = algo_struct.refIn ? reverseBits8(s[i]) : s[i];
         crc ^= d;
-        for(j=0;j<8;j++) {
+        for(j=0; j<8; j++) {
             test = (crc & 0x80) != 0;
             crc = (crc<<1) & 0xff;
             if(test)
@@ -81,7 +81,7 @@ uint8_t getCRC(char *s, struct algorithm algo_struct) {
         }
     }
     if(algo_struct.refOut)
-        crc = reverseBits(crc);
+        crc = reverseBits8(crc);
     crc ^= algo_struct.xorOut;
     return crc;
 }
