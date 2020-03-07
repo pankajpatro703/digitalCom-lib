@@ -13,7 +13,7 @@
 #    You should have received a copy of the GNU Lesser General Public License
 #    along with DigiCom-algorithms.  If not, see <https://www.gnu.org/licenses/>.
 
-#Encryption and Decryption using playfair cipher
+#Encryption and Decryption using Vernam cipher
 ################################
 #   @Author: pankajpatro703    #
 # Licensed under Lesser GPL v3 #
