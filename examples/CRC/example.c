@@ -1,6 +1,6 @@
 #include<stdio.h>
-#include"crc8.h"
-#include"crc16.h"
+#include"../../src/CRC/crc8.h"
+#include"../../src/CRC/crc16.h"
 
 void main() {
     char message[] ="Hello. This is the message.";
