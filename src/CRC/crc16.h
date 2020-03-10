@@ -23,7 +23,6 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
-#include<string.h>
 #include<stdbool.h>
 #include<stdint.h>
 
@@ -76,16 +75,17 @@ uint16_t reverseBits16(uint16_t num) {
     return revnum; 
 } 
 
-uint16_t getCRC16(char *s, struct algorithm16 algo_struct) {
+uint16_t getCRC16(uint8_t *s, struct algorithm16 algo_struct, int length) {
     /*
     This function calculates the 16-bit CRC for a given string.
-    :param char *s: string(char array) on which the CRC is to be calculated
+    :param uint8_t *s: data(byte array) on which the CRC is to be calculated
     :param struct algorithm16 algo_struct: struct defining the algorithm parameters
+    :param int length: length of the message
     :return uint16_t crc: calculated 16-bit CRC
     */
     uint16_t d, test, crc = algo_struct.init;
     unsigned int i, j;
-    for(i=0; i<strlen(s); i++) {
+    for(i=0; i<length; i++) {
         d = algo_struct.refIn ? reverseBits16(s[i]) : s[i] << 8;
         crc ^= d;
         for(j=0; j<8; j++) {

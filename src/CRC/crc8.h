@@ -23,7 +23,6 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
-#include<string.h>
 #include<stdbool.h>
 #include<stdint.h>
 
@@ -63,16 +62,17 @@ uint8_t reverseBits8(uint8_t num) {
     return revnum; 
 } 
 
-uint8_t getCRC8(char *s, struct algorithm8 algo_struct) {
+uint8_t getCRC8(uint8_t *s, struct algorithm8 algo_struct, int length) {
     /*
     This function calculates the 8-bit CRC for a given string.
-    :param char *s: string(char array) on which the CRC is to be calculated
+    :param uint8_t *s: data(byte array) on which the CRC is to be calculated
     :param struct algorithm8 algo_struct: struct defining the algorithm parameters
+    :param int length: length of the message
     :return uint8_t crc: calculated 8-bit CRC
     */
     uint8_t d, test, crc = algo_struct.init;
     unsigned int i, j;
-    for(i=0; i<strlen(s); i++) {
+    for(i=0; i<length; i++) {
         d = algo_struct.refIn ? reverseBits8(s[i]) : s[i];
         crc ^= d;
         for(j=0; j<8; j++) {
