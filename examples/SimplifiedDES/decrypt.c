@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../../src/SimplifiedDES/sdes.h"
+
 void main()
 {
     char p10[10]={3,5,2,7,4,10,1,9,8,6};
