@@ -40,11 +40,11 @@ struct algorithm16 CRC16_ARC            = {.poly=0x8005, .init=0x0000, .refIn=tr
 struct algorithm16 CRC16_AUG_CCITT      = {.poly=0x1021, .init=0x1D0F, .refIn=false, .refOut=false, .xorOut=0x0000}; 
 struct algorithm16 CRC16_DVB_S2BUYPASS  = {.poly=0x8005, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0x0000}; 
 struct algorithm16 CRC16_CDMA2000       = {.poly=0xC867, .init=0xFFFF, .refIn=false, .refOut=false, .xorOut=0x0000}; 
-struct algorithm16 CRC16_DDS_110        = {.poly=0x8005, .init=0x800D, .refIn=false, .refOut=false, .xorOut=0x0000}; 
+struct algorithm16 CRC16_DDS110         = {.poly=0x8005, .init=0x800D, .refIn=false, .refOut=false, .xorOut=0x0000}; 
 struct algorithm16 CRC16_DECT_R         = {.poly=0x0589, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0x0001}; 
 struct algorithm16 CRC16_DECT_X         = {.poly=0x0589, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0x0000}; 
 struct algorithm16 CRC16_DNP            = {.poly=0x3D65, .init=0x0000, .refIn=true,  .refOut=true,  .xorOut=0xFFFF}; 
-struct algorithm16 CRC16_EN_13757       = {.poly=0x3D65, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0xFFFF}; 
+struct algorithm16 CRC16_EN13757        = {.poly=0x3D65, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0xFFFF}; 
 struct algorithm16 CRC16_GENIBUS        = {.poly=0x1021, .init=0xFFFF, .refIn=false, .refOut=false, .xorOut=0xFFFF}; 
 struct algorithm16 CRC16_MAXIM          = {.poly=0x8005, .init=0x0000, .refIn=true,  .refOut=true,  .xorOut=0xFFFF}; 
 struct algorithm16 CRC16_MCRF4XX        = {.poly=0x1021, .init=0xFFFF, .refIn=true,  .refOut=true,  .xorOut=0x0000}; 
@@ -56,7 +56,7 @@ struct algorithm16 CRC16_USB            = {.poly=0x8005, .init=0xFFFF, .refIn=tr
 struct algorithm16 CRC16_A              = {.poly=0x1021, .init=0xC6C6, .refIn=true,  .refOut=true,  .xorOut=0x0000}; 
 struct algorithm16 CRC16_KERMIT         = {.poly=0x1021, .init=0x0000, .refIn=true,  .refOut=true,  .xorOut=0x0000}; 
 struct algorithm16 CRC16_MODBUS         = {.poly=0x8005, .init=0xFFFF, .refIn=true,  .refOut=true,  .xorOut=0x0000}; 
-struct algorithm16 CRC16_X_25           = {.poly=0x1021, .init=0xFFFF, .refIn=true,  .refOut=true,  .xorOut=0xFFFF}; 
+struct algorithm16 CRC16_X25            = {.poly=0x1021, .init=0xFFFF, .refIn=true,  .refOut=true,  .xorOut=0xFFFF}; 
 struct algorithm16 CRC16_XMODEM         = {.poly=0x1021, .init=0x0000, .refIn=false, .refOut=false, .xorOut=0x0000};
 
 uint16_t reverseBits16(uint16_t num) {
