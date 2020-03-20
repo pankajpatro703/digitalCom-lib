@@ -66,7 +66,7 @@ if(__name__=='__main__'):
     secretkey = 'This is the Secret Key'
     msg = 'This is the message to be protected'
     enc = vernamEncrypt(msg, secretkey)
-    print('Ecrypted message:')
+    print('Encrypted message:')
     print(enc)
     dec = vernamDecrypt(enc, secretkey)
     print('Decrypted message:')
