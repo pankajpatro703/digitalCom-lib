@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../../src/SimplifiedDES/sdes.h"
+#include "sdes.h"
 
 void main()
 {
