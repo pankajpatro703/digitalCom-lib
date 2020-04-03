@@ -28,17 +28,18 @@
 #include<math.h>
 #include<stdlib.h>
 
-uint16_t p10[10] = {3,5,2,7,4,10,1,9,8,6};
-uint16_t p8[8] = {6,3,7,4,8,5,10,9};
-uint16_t iP[8] = {2,6,3,1,4,8,5,7};
-uint16_t invIP[8] = {4,1,3,5,7,2,8,6};
+//Sequences defined by SDES algorithm
+uint8_t p10[10] = {3,5,2,7,4,10,1,9,8,6};
+uint8_t p8[8] = {6,3,7,4,8,5,10,9};
+uint8_t iP[8] = {2,6,3,1,4,8,5,7};
+uint8_t invIP[8] = {4,1,3,5,7,2,8,6};
 
-uint16_t s0[4][4] = {{1,0,3,2},{3,2,1,0},{0,2,1,3},{3,1,3,2}};
-uint16_t s1[4][4] = {{0,1,2,3},{2,0,1,3},{3,0,1,0},{2,1,0,3}};
-uint16_t eP[8] = {4,1,2,3,2,3,4,1};
-uint16_t p4[4] = {2,4,3,1};
+uint8_t s0[4][4] = {{1,0,3,2},{3,2,1,0},{0,2,1,3},{3,1,3,2}};
+uint8_t s1[4][4] = {{0,1,2,3},{2,0,1,3},{3,0,1,0},{2,1,0,3}};
+uint8_t eP[8] = {4,1,2,3,2,3,4,1};
+uint8_t p4[4] = {2,4,3,1};
 
-uint16_t permutation(uint16_t seq[], uint8_t size, uint16_t data, uint8_t datasize) {
+uint16_t permutation(uint8_t seq[], uint8_t size, uint16_t data, uint8_t datasize) {
     /*
     This function changes the sequence of occurence of bits in the data.
     :param uint16_t *seq: required order/sequence array 
