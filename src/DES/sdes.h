@@ -2,17 +2,17 @@
 *    Copyright 2020 Pankajkumar Patro
 *
 *    This file is part of digitalCom-lib.
-*    
+*
 *    digitalCom-lib is free software: you can redistribute it and/or modify
 *    it under the terms of the GNU Lesser General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
-*    
+*
 *    digitalCom-lib is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *    GNU Lesser General Public License for more details.
-*    
+*
 *    You should have received a copy of the GNU Lesser General Public License
 *    along with digitalCom-lib.  If not, see <https://www.gnu.org/licenses/>.
 */
@@ -42,7 +42,7 @@ uint8_t p4[4] = {2,4,3,1};
 uint16_t permutation(uint8_t seq[], uint8_t size, uint16_t data, uint8_t datasize) {
     /*
     This function changes the sequence of occurence of bits in the data.
-    :param uint16_t *seq: required order/sequence array 
+    :param uint8_t *seq: required order/sequence array
     :param uint8_t size: size of array
     :param uint16_t data: original data whose bit sequence is to be changed
     :param uint8_t datasize: number of bits in original data
@@ -70,7 +70,7 @@ uint8_t fk(uint8_t base, uint8_t key) {
     /*
     This function applies a key on given data.
     :param uint8_t base: original 8-bit data on which key is to be applied
-    :param uint8_t key: 8-bit generated key 
+    :param uint8_t key: 8-bit generated key
     :return uint8_t ept: 8-bit data obtained after applying key function
     */
     uint8_t pos = permutation(eP, 8, (base & 0b1111), 4) ^ key;
@@ -104,7 +104,7 @@ uint8_t* keygen(uint16_t key) {
     This function generates two keys from user defined key.
     :param uint16_t key: original 10-bit key
     :return uint8_t *k: generated array of two 8-bit keys
-    */ 
+    */
     uint16_t base = lshift(permutation(p10, 10, key, 10), 10, 5, 1);
     uint8_t *k;
     k = malloc(2*sizeof(*k));
@@ -112,7 +112,7 @@ uint8_t* keygen(uint16_t key) {
         return NULL;
     k[0] = permutation(p8, 8, base, 10);
     k[1] = permutation(p8, 8, lshift(base, 10, 5, 2), 10);
-    return k; 
+    return k;
 }
 
 uint8_t sdesEncrypt(uint8_t plaintext, uint16_t key) {
@@ -120,7 +120,7 @@ uint8_t sdesEncrypt(uint8_t plaintext, uint16_t key) {
     This function encrypts the plaintext using S-DES.
     :param uint8_t plaintext: original 8-bit data
     :param uint16_t key: secret 10-bit key
-    :return uint8_t ciphertext: 8-bit cipher text after encryption 
+    :return uint8_t ciphertext: 8-bit cipher text after encryption
     */
     uint8_t *k;
     k = keygen(key);
