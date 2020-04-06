@@ -23,7 +23,6 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
-#include<stdio.h>
 #include<stdint.h>
 #include<math.h>
 #include<stdlib.h>
