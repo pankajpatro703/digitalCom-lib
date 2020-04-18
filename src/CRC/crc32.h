@@ -23,6 +23,9 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
+#ifndef CRC32_H
+#define CRC32_H
+
 #include<stdbool.h>
 #include<stdint.h>
 
@@ -86,3 +89,6 @@ uint32_t getCRC32(uint8_t *s, struct algorithm32 algo_struct, int length) {
     crc ^= algo_struct.xorOut;
     return crc;
 }
+
+#endif
+

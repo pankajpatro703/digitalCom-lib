@@ -23,6 +23,9 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
+#ifndef CRC8_H
+#define CRC8_H
+
 #include<stdbool.h>
 #include<stdint.h>
 
@@ -87,3 +90,6 @@ uint8_t getCRC8(uint8_t *s, struct algorithm8 algo_struct, int length) {
     crc ^= algo_struct.xorOut;
     return crc;
 }
+
+#endif
+

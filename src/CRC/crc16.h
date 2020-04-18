@@ -23,6 +23,9 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
+#ifndef CRC16_H
+#define CRC16_H
+
 #include<stdbool.h>
 #include<stdint.h>
 
@@ -100,3 +103,6 @@ uint16_t getCRC16(uint8_t *s, struct algorithm16 algo_struct, int length) {
     crc ^= algo_struct.xorOut;
     return crc;
 }
+
+#endif
+

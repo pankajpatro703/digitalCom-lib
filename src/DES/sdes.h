@@ -23,6 +23,9 @@
 // Licensed under Lesser GPL v3 //
 //////////////////////////////////
 
+#ifndef SDES_H
+#define SDES_H
+
 #include<stdint.h>
 #include<math.h>
 #include<stdlib.h>
@@ -141,3 +144,6 @@ uint8_t sdesDecrypt(uint8_t ciphertext, uint16_t key) {
     free(k);
     return decipheredtext;
 }
+
+#endif
+
