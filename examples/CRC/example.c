@@ -7,7 +7,7 @@ void main() {
     char message[] ="Hello. This is the message.";
     int length = sizeof(message)-1;    
     
-    //char message[] = {0x3A,0x2B,0x00};  
+    //char message[] = {0x3A,0x2B,0x11};  
     //int length = sizeof(message);
     
     //8-bit CRC applications
