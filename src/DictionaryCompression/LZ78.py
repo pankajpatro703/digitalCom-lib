@@ -23,7 +23,7 @@
 
 def compress(uncompressed_string):
     '''
-    This method calculates the compressed data and creates the initial table.
+    This method calculates the compressed data.
     :param uncompressed_string: original string to be compressed
     :return compressed_string: list with final compressed data as tuple pair
     '''
