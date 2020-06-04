@@ -34,7 +34,7 @@ def getlenkey(text, key):
         lenkey += key
     return (lenkey[:len(text)])
 
-def vernamEncrypt(plaintext, key):
+def encrypt(plaintext, key):
     '''
     This method encrypts the plaintext using Vernam cipher.
     :param plaintext: original string
@@ -48,7 +48,7 @@ def vernamEncrypt(plaintext, key):
         ciphertext += n
     return(ciphertext)
 
-def vernamDecrypt(ciphertext, key):
+def decrypt(ciphertext, key):
     '''
     This method decrypts the ciphertext using Vernam cipher.
     :param ciphertext: ciphered string
@@ -65,9 +65,9 @@ def vernamDecrypt(ciphertext, key):
 if(__name__=='__main__'):
     secretkey = 'This is the Secret Key'
     msg = 'This is the message to be protected'
-    enc = vernamEncrypt(msg, secretkey)
+    enc = encrypt(msg, secretkey)
     print('Encrypted message:')
     print(enc)
-    dec = vernamDecrypt(enc, secretkey)
+    dec = decrypt(enc, secretkey)
     print('Decrypted message:')
     print(dec)

@@ -4,9 +4,9 @@ from vernam import *
 
 secretkey = input('Enter the Secret Key: ')
 msg = input('Enter the message to be protected: ')
-enc = vernamEncrypt(msg, secretkey)
+enc = encrypt(msg, secretkey)
 print('Encrypted message:')
 print(enc)
-dec = vernamDecrypt(enc, secretkey)
+dec = decrypt(enc, secretkey)
 print('Decrypted message:')
 print(dec)

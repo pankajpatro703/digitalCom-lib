@@ -116,7 +116,7 @@ def getcode(l, r, square, operation):
     return code
 
 
-def playfairEncrypt(plaintext, square):
+def encrypt(plaintext, square):
     '''
     This method encrypts the plaintext using playfair cipher.
     :param plaintext: original string
@@ -134,7 +134,7 @@ def playfairEncrypt(plaintext, square):
     ciphertext = "".join(newpairs)
     return ciphertext
 
-def playfairDecrypt(ciphertext, square):
+def decrypt(ciphertext, square):
     '''
     This method decrypts the ciphertext using playfair cipher.
     :param ciphertext: ciphered string
@@ -159,9 +159,9 @@ if (__name__ == '__main__'):
     print('Square map:')
     for row in new_square:
         print(row)
-    enc = playfairEncrypt(msg, new_square)
+    enc = encrypt(msg, new_square)
     print('Encrypted message:')
     print(enc)
-    dec = playfairDecrypt(enc, new_square)
+    dec = decrypt(enc, new_square)
     print('Decrypted message:')
     print(dec)

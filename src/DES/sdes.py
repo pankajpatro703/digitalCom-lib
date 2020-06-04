@@ -93,7 +93,7 @@ def keygen(key):
     k2 = permutation(p8, lshift(base, 5, 2), 10)
     return(k1, k2)
 
-def sdesEncrypt(plaintext, key):
+def encrypt(plaintext, key):
     '''
     This method encrypts the plaintext using S-DES.
     :param plaintext: original 8-bit data
@@ -104,7 +104,7 @@ def sdesEncrypt(plaintext, key):
     ciphertext = permutation(invIP, fk(sw(fk(permutation(iP, plaintext, 8), k1), 4), k2), 8)
     return(ciphertext)
 
-def sdesDecrypt(ciphertext, key):
+def decrypt(ciphertext, key):
     '''
     This method decrypts the ciphertext using S-DES.
     :param ciphertext: ciphered 8-bit data
@@ -118,9 +118,9 @@ def sdesDecrypt(ciphertext, key):
 if(__name__=='__main__'):
     secretkey = 0b1010000010    #This is the secret key
     msg = 0b01110010            #This is the message to be protected
-    enc = sdesEncrypt(msg, secretkey)
+    enc = encrypt(msg, secretkey)
     print('Encrypted message:')
     print(format(enc,'08b'))
-    dec = sdesDecrypt(enc, secretkey)
+    dec = decrypt(enc, secretkey)
     print('Decrypted message:')    
     print(format(dec,'08b'))
