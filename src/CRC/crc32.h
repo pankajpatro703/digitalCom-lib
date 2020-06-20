@@ -1,27 +1,32 @@
-/*
-*    Copyright 2020 Pankajkumar Patro
-*
-*    This file is part of digitalCom-lib.
-*    
-*    digitalCom-lib is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU Lesser General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*    
-*    digitalCom-lib is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU Lesser General Public License for more details.
-*    
-*    You should have received a copy of the GNU Lesser General Public License
-*    along with digitalCom-lib.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-//32-bit CRC Hash algorithm 
-//////////////////////////////////
-//   @Author: pankajpatro703    //
-// Licensed under Lesser GPL v3 //
-//////////////////////////////////
+/**
+ * @file         crc32.h
+ * @brief        Cyclic Redundancy Check - 32-bit CRC calculator
+ * @author       pankajpatro703
+ * @date         08.03.2020      //created
+ * @date         20.06.2020      //modified
+ * @version      1.0
+ * @copyright    Copyright (C) 2020 Pankajkumar Patro
+ * @license      GNU Lesser GPL v3.0+
+ *
+ *    crc32.h - Header file to calculate 32-bit CRC Hash value.
+ *
+ *    Copyright (C) 2020 Pankajkumar Patro
+ *
+ *    This file is part of digitalCom-lib.
+ *
+ *    digitalCom-lib is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU Lesser General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    digitalCom-lib is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU Lesser General Public License for more details.
+ *
+ *    You should have received a copy of the GNU Lesser General Public License
+ *    along with digitalCom-lib.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 #ifndef CRC32_H
 #define CRC32_H
@@ -29,66 +34,72 @@
 #include<stdbool.h>
 #include<stdint.h>
 
-struct algorithm32 {
-    /*
-    This structure defines the parameters required for algorithms used for different applications.
-    */
+/**
+ * Example:
+ * @code
+ *  #include "crc32.h"
+ *  algorithm32 CRC_new = {.poly=0x3712AA00, .init=0x0011CA01, .refIn=false, .refOut=false, .xorOut=0x000011AA};
+ * @endcode
+ */
+
+/// This structure type defines the parameters required for algorithms used in different applications.
+typedef struct {
     uint32_t poly, init, xorOut;
     bool refIn, refOut;
-};
+} algorithm32;
 
-//Different application types and their parameters
-struct algorithm32 CRC32        = {.poly=0x04C11DB7, .init=0xFFFFFFFF, .refIn=true,  .refOut=true,  .xorOut=0xFFFFFFFF}; 
-struct algorithm32 CRC32_BZIP2  = {.poly=0x04C11DB7, .init=0xFFFFFFFF, .refIn=false, .refOut=false, .xorOut=0xFFFFFFFF}; 
-struct algorithm32 CRC32_C      = {.poly=0x1EDC6F41, .init=0xFFFFFFFF, .refIn=true,  .refOut=true,  .xorOut=0xFFFFFFFF}; 
-struct algorithm32 CRC32_D      = {.poly=0xA833982B, .init=0xFFFFFFFF, .refIn=true,  .refOut=true,  .xorOut=0xFFFFFFFF}; 
-struct algorithm32 CRC32_MPEG2  = {.poly=0x04C11DB7, .init=0xFFFFFFFF, .refIn=false, .refOut=false, .xorOut=0x00000000}; 
-struct algorithm32 CRC32_POSIX  = {.poly=0x04C11DB7, .init=0x00000000, .refIn=false, .refOut=false, .xorOut=0xFFFFFFFF}; 
-struct algorithm32 CRC32_Q      = {.poly=0x814141AB, .init=0x00000000, .refIn=false, .refOut=false, .xorOut=0x00000000}; 
-struct algorithm32 CRC32_JAMCRC = {.poly=0x04C11DB7, .init=0xFFFFFFFF, .refIn=true,  .refOut=true,  .xorOut=0x00000000}; 
-struct algorithm32 CRC32_XFER   = {.poly=0x000000AF, .init=0x00000000, .refIn=false, .refOut=false, .xorOut=0x00000000}; 
+//  Different pre-defined algorithms
+algorithm32 CRC32_ADCCP,        ///< ISO-HDLC, V-42, XZ, PKZIP
+            CRC32_AUTOSAR,      ///< AUTOSAR
+            CRC32_BZIP2,        ///< AAL5, DECT-B
+            CRC32_C,            ///< ISCSI, BASE91-C, CASTAGNOLI, INTERLAKEN
+            CRC32_CD_ROM_EDC,   ///< CD-ROM-EDC
+            CRC32_D,            ///< BASE91-D
+            CRC32_JAMCRC,       ///< Altera Megacore
+            CRC32_MPEG2,        ///< Video LAN
+            CRC32_POSIX,        ///< CKSUM
+            CRC32_Q,            ///< Aeronautical Information Exchange Model
+            CRC32_XFER;         ///< XFER
 
-uint32_t reverseBits32(uint32_t num) {
-    /*
-    This function returns the 32-bit number obtained by reversing the bit sequence of input number.
-    :param uint32_t num: original 32-bit integer to be reversed
-    :return uint32_t revnum: reversed 32-bit number 
-    */ 
-    uint32_t  NoOfBits = sizeof(num) * 8;
-    uint32_t revnum = 0, i, temp; 
-    for (i = 0; i < NoOfBits; i++) { 
-        temp = (num & (1 << i)); 
-        if(temp) 
-            revnum |= (1 << ((NoOfBits - 1) - i)); 
-    }
-    return revnum; 
-} 
+/**
+ * Example:
+ * @code
+ *  #include "crc32.h"
+ *  void main() {
+ *      uint32_t revnum = reverseBits32(0x04820100);
+ *  }
+ * @endcode
+ */
 
-uint32_t getCRC32(uint8_t *s, struct algorithm32 algo_struct, int length) {
-    /*
-    This function calculates the 32-bit CRC for a given string.
-    :param uint8_t *s: data(byte array) on which the CRC is to be calculated
-    :param struct algorithm16 algo_struct: struct defining the algorithm parameters
-    :param int length: length of the message
-    :return uint32_t crc: calculated 32-bit CRC
-    */
-    uint32_t d, test, crc = algo_struct.init;
-    unsigned int i, j;
-    for(i=0; i<length; i++) {
-        d = algo_struct.refIn ? reverseBits32(s[i]) : s[i] << 24;
-        crc ^= d;
-        for(j=0; j<8; j++) {
-            test = (crc & 0x80000000) != 0;
-            crc = (crc<<1) & 0xffffffff;
-            if(test)
-                crc ^= algo_struct.poly;
-        }
-    }
-    if(algo_struct.refOut)
-        crc = reverseBits32(crc);
-    crc ^= algo_struct.xorOut;
-    return crc;
-}
+/**
+ *  Calculates the 32-bit number obtained by reversing the bit sequence of input number.
+ *  @param num original 32-bit integer to be reversed
+ *  @return reversed 32-bit integer value
+ */
+uint32_t reverseBits32(uint32_t num);
+
+/**
+ * Example:
+ * @code
+ *  #include "crc32.h"
+ *  void main() {
+ *      char message1[] = "Enter data here";
+ *      unsigned int length1 = sizeof(message1)-1;
+ *      char message2[] = {0x3A,0x2B,0x11};
+ *      unsigned int length2 = sizeof(message2);
+ *      printf("32-bit CRC of message1 is %08x\n",getCRC32(message1, &CRC32_ADCCP, length1));
+ *      printf("32-bit CRC of message2 is %08x\n",getCRC32(message2, &CRC32_ADCCP, length2));
+ *  }
+ * @endcode
+ */
+
+/**
+ *  Calculates the 32-bit CRC Hash for a given string of data.
+ *  @param s data(byte array) on which the CRC is to be calculated
+ *  @param algo_struct struct defining the algorithm parameters
+ *  @param length length of the message data
+ *  @return calculated 32-bit CRC value
+ */
+uint32_t getCRC32(uint8_t *s, algorithm32 *algo_struct, unsigned int length);
 
 #endif
-
