@@ -2,6 +2,7 @@
 #include "../../src/CRC/crc8.h"
 #include "../../src/CRC/crc16.h"
 #include "../../src/CRC/crc32.h"
+#include "../../src/CRC/crc64.h"
 
 void main() {
     char message[] ="Hello. This is the message.";
@@ -75,4 +76,10 @@ void main() {
     printf("32-bit POSIX CRC of the message is %08x\n",getCRC32(message, &CRC32_POSIX, length));
     printf("32-bit Q CRC of the message is %08x\n",getCRC32(message, &CRC32_Q, length));
     printf("32-bit XFER CRC of the message is %08x\n",getCRC32(message, &CRC32_XFER, length));
+
+    //64-bit CRC applications
+    printf("64-bit ECMA-182 CRC of the message is %016lx\n",getCRC64(message, &CRC64_ECMA_182, length));
+    printf("64-bit GO-ISO CRC of the message is %016lx\n",getCRC64(message, &CRC64_GO_ISO, length));
+    printf("64-bit WE CRC of the message is %016lx\n",getCRC64(message, &CRC64_WE, length));
+    printf("64-bit XZ CRC of the message is %016lx\n",getCRC64(message, &CRC64_XZ, length));
 }
