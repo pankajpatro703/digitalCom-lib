@@ -6,6 +6,10 @@ Library for implementation of Data Compression, Encryption and Error Correction 
 *  C, Rust (efficient resource usage)          
 *  Verilog, VHDL (hardware description)       
 
-#Error detection and correction
+# Error detection and correction
 *  CRC      
-source: http://reveng.sourceforge.net/crc-catalogue/all.htm
+reference: http://reveng.sourceforge.net/crc-catalogue/all.htm    
+
+# Encryption
+*  S-DES
+reference: http://mercury.webster.edu/aleshunas/COSC%205130/G-SDES.pdf    
