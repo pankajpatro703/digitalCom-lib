@@ -11,5 +11,5 @@ Library for implementation of Data Compression, Encryption and Error Correction 
 reference: http://reveng.sourceforge.net/crc-catalogue/all.htm    
 
 # Encryption
-*  S-DES
+*  S-DES            
 reference: http://mercury.webster.edu/aleshunas/COSC%205130/G-SDES.pdf    
