@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<math.h>
-#include"../../src/DES/sdes.h"
+#include <stdio.h>
+#include <math.h>
+#include "../../src/DES/sdes.h"
 
+//  Function to display the binary format of a number
 void printBin(int number, int exsize) {
     for(int i=1; i<=exsize; i++) {
         printf("%c",number & (int)pow(2,exsize-i)?'1':'0');
@@ -11,15 +12,15 @@ void printBin(int number, int exsize) {
 
 void main() {
     unsigned short int secretkey = 0b1010000010;
-    unsigned short int msg = 0b01110010;
+    char msg = 0b01110010;
     printf("Original message:\n");
     printBin(msg,8);
     printf("Secret key:\n");
     printBin(secretkey,10);
-    unsigned short int enc = sdesEncrypt(msg, secretkey);
+    char enc = encrypt(&msg, &secretkey);
     printf("Encrypted message:\n");
     printBin(enc,8);
-    unsigned short int dec = sdesDecrypt(enc, secretkey);
+    char dec = decrypt(&enc, &secretkey);
     printf("Decrypted message:\n");
     printBin(dec,8);
 }
