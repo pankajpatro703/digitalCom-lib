@@ -3,7 +3,7 @@
  * @brief        Simplified Data Encryption Standard - 8-bit DES implementation
  * @author       pankajpatro703
  * @date         27.02.2019      //created
- * @date         28.06.2020      //modified
+ * @date         19.07.2020      //modified
  * @version      1.0
  * @copyright    Copyright (C) 2020 Pankajkumar Patro
  * @license      GNU Lesser GPL v3.0+
@@ -36,14 +36,14 @@
 #include <math.h>
 
 //  Sequences defined by SDES algorithm
-uint8_t p10[10],    ///< 10 position permutation for key generation
-        p8[8],      ///< 8 position permutation for key generation
-        iP[8],      ///< 8 position initial permutation
-        invIP[8],   ///< 8 position final permutation
-        s0[4][4],   ///< s-box 1
-        s1[4][4],   ///< s-box 2
-        eP[8],      ///< 8 position permutation for applying a key
-        p4[4];      ///< 4 position permutation for dividing the bit sequence
+extern uint8_t  p10[10],    ///< 10 position permutation for key generation
+                p8[8],      ///< 8 position permutation for key generation
+                iP[8],      ///< 8 position initial permutation
+                invIP[8],   ///< 8 position final permutation
+                s0[4][4],   ///< s-box 1
+                s1[4][4],   ///< s-box 2
+                eP[8],      ///< 8 position permutation for applying a key
+                p4[4];      ///< 4 position permutation for dividing the bit sequence
 
 /**
  *  Changes the sequence of occurence of bits in the data(upto 16 bits).

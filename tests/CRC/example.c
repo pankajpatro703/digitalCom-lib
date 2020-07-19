@@ -5,7 +5,7 @@
 #include "../../src/CRC/crc64.h"
 
 void main() {
-    char message[] ="Hello. This is the message.";
+    char message[] = "Hello. This is the message.";
     unsigned int length = sizeof(message)-1;
 
     //char message[] = {0x3A,0x2B,0x11};
@@ -24,7 +24,7 @@ void main() {
     printf("8-bit I-CODE CRC of the message is %02x\n",getCRC8(message, &CRC8_I_CODE, length));
     printf("8-bit LTE CRC of the message is %02x\n",getCRC8(message, &CRC8_LTE, length));
     printf("8-bit MAXIM CRC of the message is %02x\n",getCRC8(message, &CRC8_MAXIM, length));
-    printf("8-bit MIFARE_MAD CRC of the message is %02x\n",getCRC8(message, &CRC8_MIFARE_MAD, length));
+    printf("8-bit MIFARE-MAD CRC of the message is %02x\n",getCRC8(message, &CRC8_MIFARE_MAD, length));
     printf("8-bit NRSC-5 CRC of the message is %02x\n",getCRC8(message, &CRC8_NRSC_5, length));
     printf("8-bit OPENSAFETY CRC of the message is %02x\n",getCRC8(message, &CRC8_OPENSAFETY, length));
     printf("8-bit ROHC CRC of the message is %02x\n",getCRC8(message, &CRC8_ROHC, length));

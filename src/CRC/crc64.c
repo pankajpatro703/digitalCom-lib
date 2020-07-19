@@ -3,7 +3,7 @@
  * @brief        Cyclic Redundancy Check - 64-bit CRC calculator
  * @author       pankajpatro703
  * @date         20.06.2020      //created
- * @date         20.06.2020      //modified
+ * @date         19.07.2020      //modified
  * @version      1.0
  * @copyright    Copyright (C) 2020 Pankajkumar Patro
  * @license      GNU Lesser GPL v3.0+
@@ -46,7 +46,7 @@ uint64_t reverseBits64(uint64_t num) {
     return revnum;
 }
 
-uint64_t getCRC64(uint8_t *s, algorithm64 *algo_struct, unsigned int length) {
+uint64_t getCRC64(uint8_t* s, algorithm64* algo_struct, unsigned int length) {
     uint64_t d, test, crc = algo_struct -> init;
     unsigned int i, j;
     for(i=0; i<length; i++) {

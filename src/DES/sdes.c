@@ -3,7 +3,7 @@
  * @brief        Simplified Data Encryption Standard - 8-bit DES implementation
  * @author       pankajpatro703
  * @date         27.02.2019      //created
- * @date         28.06.2020      //modified
+ * @date         19.07.2020      //modified
  * @version      1.0
  * @copyright    Copyright (C) 2020 Pankajkumar Patro
  * @license      GNU Lesser GPL v3.0+
@@ -40,7 +40,7 @@ uint8_t eP[8]       = {4,1,2,3,2,3,4,1};
 uint8_t p4[4]       = {2,4,3,1};
 
 uint16_t* permutation16(uint8_t* seq, uint8_t size, uint16_t* data, uint8_t datasize) {
-    uint16_t* result = malloc(sizeof(uint16_t));
+    uint16_t* result = (uint16_t*)malloc(sizeof(uint16_t));
     if(result == NULL)
         return NULL;
     for(int i=0; i<size; i++)
@@ -49,7 +49,7 @@ uint16_t* permutation16(uint8_t* seq, uint8_t size, uint16_t* data, uint8_t data
 }
 
 uint8_t* permutation8(uint8_t* seq, uint8_t size, uint8_t* data, uint8_t datasize) {
-    uint8_t* result = malloc(sizeof(uint8_t));
+    uint8_t* result = (uint8_t*)malloc(sizeof(uint8_t));
     if(result == NULL)
         return NULL;
     for(int i=0; i<size; i++)
@@ -58,7 +58,7 @@ uint8_t* permutation8(uint8_t* seq, uint8_t size, uint8_t* data, uint8_t datasiz
 }
 
 uint8_t* sw(uint8_t* data, uint8_t size, uint8_t partsize) {
-    uint8_t* exchangedData = malloc(sizeof(uint8_t));
+    uint8_t* exchangedData = (uint8_t*)malloc(sizeof(uint8_t));
     if(exchangedData == NULL)
         return NULL;
     *exchangedData = (*data << (partsize) | *data >> (size - partsize)) & (uint8_t)(pow(2, size) - 1);
@@ -66,7 +66,7 @@ uint8_t* sw(uint8_t* data, uint8_t size, uint8_t partsize) {
 }
 
 uint8_t* fk(uint8_t* base, uint8_t* key) {
-    uint8_t* ept = malloc(sizeof(uint8_t));
+    uint8_t* ept = (uint8_t*)malloc(sizeof(uint8_t));
     if(ept == NULL)
         return NULL;
     uint8_t rpt = *base & 0b1111;
@@ -79,7 +79,7 @@ uint8_t* fk(uint8_t* base, uint8_t* key) {
 }
 
 uint16_t* lshift(uint16_t* data, uint8_t size, uint8_t partsize, uint8_t shifts) {
-    uint16_t* shiftData = malloc(sizeof(uint16_t));
+    uint16_t* shiftData = (uint16_t*)malloc(sizeof(uint16_t));
     if(shiftData == NULL)
         return NULL;
     uint16_t lpart = *data >> (size - partsize);
@@ -91,7 +91,7 @@ uint16_t* lshift(uint16_t* data, uint8_t size, uint8_t partsize, uint8_t shifts)
 }
 
 uint8_t* keygen(uint16_t* key) {
-    uint8_t* k = malloc(2 * sizeof(*k));
+    uint8_t* k = (uint8_t*)malloc(2 * sizeof(*k));
     if(k == NULL)
         return NULL;
     uint16_t* base = lshift(permutation16(p10, 10, key, 10), 10, 5, 1);

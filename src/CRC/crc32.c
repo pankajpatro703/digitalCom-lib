@@ -3,7 +3,7 @@
  * @brief        Cyclic Redundancy Check - 32-bit CRC calculator
  * @author       pankajpatro703
  * @date         08.03.2020      //created
- * @date         20.06.2020      //modified
+ * @date         19.07.2020      //modified
  * @version      1.0
  * @copyright    Copyright (C) 2020 Pankajkumar Patro
  * @license      GNU Lesser GPL v3.0+
@@ -53,7 +53,7 @@ uint32_t reverseBits32(uint32_t num) {
     return revnum;
 }
 
-uint32_t getCRC32(uint8_t *s, algorithm32 *algo_struct, unsigned int length) {
+uint32_t getCRC32(uint8_t* s, algorithm32* algo_struct, unsigned int length) {
     uint32_t d, test, crc = algo_struct -> init;
     unsigned int i, j;
     for(i=0; i<length; i++) {
