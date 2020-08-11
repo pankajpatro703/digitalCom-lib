@@ -3,12 +3,12 @@
  * @brief        Cyclic Redundancy Check - CRC calculator
  * @author       pankajpatro703
  * @date         27.07.2020      //created
- * @date         10.08.2020      //modified
+ * @date         11.08.2020      //modified
  * @version      1.0
  * @copyright    Copyright (C) 2020 Pankajkumar Patro
  * @license      GNU Lesser GPL v3.0+
  *
- * crc.cpp - Inline file to calculate 8,16,32,64-bit CRC Hash value.
+ * crc.inl - Inline file to calculate 8,16,32,64-bit CRC Hash value.
  *
  * Copyright (C) 2020 Pankajkumar Patro
  *
@@ -28,19 +28,16 @@
  * along with digitalCom-lib.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef CRC_INL
-#define CRC_INL
-
 #include "crc.hpp"
 
 template<typename T>
-CRCbase<T> :: CRCbase(crc<T> &paramlist) {
+CRCbase<T> :: CRCbase(crcparam<T> &paramlist) {
     algo_struct = &paramlist;
     nbits = sizeof(crc_val) * 8;
 }
 
 template<typename T>
-T CRCbase<T> :: reverseBits(T num) {
+T CRCbase<T> :: reverseBits(T num) const {
     T revnum = 0;
     for (uint8_t i = 0; i < nbits; ++i) {
         if(num & (1 << i))
@@ -50,16 +47,16 @@ T CRCbase<T> :: reverseBits(T num) {
 }
 
 template<typename T>
-SimpleCRC<T> :: SimpleCRC(crc<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
+LiteCRC<T> :: LiteCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
 }
 
 template<typename T>
-inline void SimpleCRC<T> :: initCRC() {
+inline void LiteCRC<T> :: initCRC() {
     CRCbase<T>::crc_val = CRCbase<T>::algo_struct -> init;
 }
 
 template<typename T>
-inline void SimpleCRC<T> :: updateCRC(uint8_t* s) {
+inline void LiteCRC<T> :: updateCRC(uint8_t* s) {
     CRCbase<T>::crc_val ^= (CRCbase<T>::algo_struct -> refIn ? CRCbase<T>::reverseBits(*s) : *s << (CRCbase<T>::nbits - 8));
     for(uint8_t i = 0; i < 8; ++i) {
         bool test = (CRCbase<T>::crc_val & (1 << (CRCbase<T>::nbits - 1))) != 0;
@@ -70,7 +67,7 @@ inline void SimpleCRC<T> :: updateCRC(uint8_t* s) {
 }
 
 template<typename T>
-inline T SimpleCRC<T> :: fetchCRC() {
+inline T LiteCRC<T> :: fetchCRC() {
     if(CRCbase<T>::algo_struct -> refOut)
         CRCbase<T>::crc_val = CRCbase<T>::reverseBits(CRCbase<T>::crc_val);
     CRCbase<T>::crc_val ^= CRCbase<T>::algo_struct -> xorOut;
@@ -78,7 +75,7 @@ inline T SimpleCRC<T> :: fetchCRC() {
 }
 
 template<typename T>
-T SimpleCRC<T> :: getCRC(uint8_t* s, size_t length) {
+T LiteCRC<T> :: getCRC(uint8_t* s, size_t length) {
     initCRC();
     for(size_t i = 0; i < length; ++i)
         updateCRC(s+i);
@@ -86,7 +83,7 @@ T SimpleCRC<T> :: getCRC(uint8_t* s, size_t length) {
 }
 
 template<typename T>
-FastCRC<T> :: FastCRC(crc<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
+FastCRC<T> :: FastCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
     hbits = CRCbase<T>::nbits - 8;
     M1 = (1 << hbits) - 1;
     M2 = ((1 << CRCbase<T>::nbits) - 1) - 0xff;
@@ -142,5 +139,3 @@ T FastCRC<T> :: getCRC(uint8_t* s, size_t length) {
         updateCRC(s+i);
     return fetchCRC();
 }
-
-#endif
