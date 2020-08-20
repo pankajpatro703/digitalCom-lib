@@ -1,12 +1,13 @@
 /**
- * @file         crc.inl
- * @brief        Cyclic Redundancy Check - CRC calculator
- * @author       pankajpatro703
- * @date         27.07.2020      //created
- * @date         11.08.2020      //modified
- * @version      1.0
- * @copyright    Copyright (C) 2020 Pankajkumar Patro
- * @license      GNU Lesser GPL v3.0+
+ * @file        crc.inl
+ * @brief       Cyclic Redundancy Check - CRC calculator
+ * @author      pankajpatro703
+ * @date        27.07.2020      //created
+ * @date        20.08.2020      //modified
+ * @version     1.0
+ * @copyright   Copyright (C) 2020 Pankajkumar Patro
+ * @license     GNU Lesser GPL v3.0+
+ * @see         https://github.com/pankajpatro703/digitalCom-lib
  *
  * crc.inl - Inline file to calculate 8,16,32,64-bit CRC Hash value.
  *
@@ -39,56 +40,56 @@ CRCbase<T> :: CRCbase(crcparam<T> &paramlist) {
 template<typename T>
 T CRCbase<T> :: reverseBits(T num) const {
     T revnum = 0;
-    for (uint8_t i = 0; i < nbits; ++i) {
-        if(num & (1 << i))
-            revnum |= (1 << ((nbits - 1) - i));
+    for(uint8_t i = 0; i < nbits; ++i) {
+        if(num & ((T)1 << i))
+            revnum |= ((T)1 << ((nbits - 1) - i));
     }
     return revnum;
 }
 
 template<typename T>
-LiteCRC<T> :: LiteCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
+LiteCRC<T> :: LiteCRC(crcparam<T> &paramlist) : CRCbase<T> :: CRCbase(paramlist) {
 }
 
 template<typename T>
 inline void LiteCRC<T> :: initCRC() {
-    CRCbase<T>::crc_val = CRCbase<T>::algo_struct -> init;
+    CRCbase<T> :: crc_val = CRCbase<T> :: algo_struct -> init;
 }
 
 template<typename T>
 inline void LiteCRC<T> :: updateCRC(uint8_t* s) {
-    CRCbase<T>::crc_val ^= (CRCbase<T>::algo_struct -> refIn ? CRCbase<T>::reverseBits(*s) : *s << (CRCbase<T>::nbits - 8));
+    CRCbase<T> :: crc_val ^= (CRCbase<T> :: algo_struct -> refIn ? CRCbase<T> :: reverseBits(*s) : (T)*s << (CRCbase<T> :: nbits - 8));
     for(uint8_t i = 0; i < 8; ++i) {
-        bool test = (CRCbase<T>::crc_val & (1 << (CRCbase<T>::nbits - 1))) != 0;
-        CRCbase<T>::crc_val <<= 1;
+        bool test = (CRCbase<T> :: crc_val & ((T)1 << (CRCbase<T> :: nbits - 1))) != 0;
+        CRCbase<T> :: crc_val <<= 1;
         if(test)
-            CRCbase<T>::crc_val ^= CRCbase<T>::algo_struct -> poly;
+            CRCbase<T> :: crc_val ^= CRCbase<T> :: algo_struct -> poly;
     }
 }
 
 template<typename T>
 inline T LiteCRC<T> :: fetchCRC() {
-    if(CRCbase<T>::algo_struct -> refOut)
-        CRCbase<T>::crc_val = CRCbase<T>::reverseBits(CRCbase<T>::crc_val);
-    CRCbase<T>::crc_val ^= CRCbase<T>::algo_struct -> xorOut;
-    return CRCbase<T>::crc_val;
+    if(CRCbase<T> :: algo_struct -> refOut)
+        CRCbase<T> :: crc_val = CRCbase<T> :: reverseBits(CRCbase<T> :: crc_val);
+    CRCbase<T> :: crc_val ^= CRCbase<T> :: algo_struct -> xorOut;
+    return CRCbase<T> :: crc_val;
 }
 
 template<typename T>
 T LiteCRC<T> :: getCRC(uint8_t* s, size_t length) {
     initCRC();
     for(size_t i = 0; i < length; ++i)
-        updateCRC(s+i);
+        updateCRC(s + i);
     return fetchCRC();
 }
 
 template<typename T>
-FastCRC<T> :: FastCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
-    hbits = CRCbase<T>::nbits - 8;
-    M1 = (1 << hbits) - 1;
-    M2 = ((1 << CRCbase<T>::nbits) - 1) - 0xff;
-    if(CRCbase<T>::algo_struct -> refIn) {
-        newpoly = CRCbase<T>::reverseBits(CRCbase<T>::algo_struct -> poly);
+FastCRC<T> :: FastCRC(crcparam<T> &paramlist) : CRCbase<T> :: CRCbase(paramlist) {
+    hbits = CRCbase<T> :: nbits - 8;
+    M1 = ((T)1 << hbits) - 1;
+    M2 = (((T)1 << CRCbase<T> :: nbits) - 1) - 0xff;
+    if(CRCbase<T> :: algo_struct -> refIn) {
+        newpoly = CRCbase<T> :: reverseBits(CRCbase<T> :: algo_struct -> poly);
         for(uint16_t i = 0; i < 256; ++i) {
             table[i] = i;
             for(uint8_t j = 0; j < 8; ++j) {
@@ -100,11 +101,11 @@ FastCRC<T> :: FastCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
         }
     }
     else {
-        newpoly = CRCbase<T>::algo_struct -> poly;
+        newpoly = CRCbase<T> :: algo_struct -> poly;
         for(uint16_t i = 0; i < 256; ++i) {
-            table[i] = i << hbits;
-            for(uint8_t j = 0; j < 8; j++) {
-                if(table[i] & (1 << (CRCbase<T>::nbits - 1)))
+            table[i] = (T)i << hbits;
+            for(uint8_t j = 0; j < 8; ++j) {
+                if(table[i] & ((T)1 << (CRCbase<T> :: nbits - 1)))
                     table[i] = (table[i] << 1) ^ newpoly;
                 else
                     table[i] <<= 1;
@@ -115,27 +116,27 @@ FastCRC<T> :: FastCRC(crcparam<T> &paramlist) : CRCbase<T>::CRCbase(paramlist) {
 
 template<typename T>
 inline void FastCRC<T> :: initCRC() {
-    CRCbase<T>::crc_val = CRCbase<T>::algo_struct -> refIn ? CRCbase<T>::reverseBits(CRCbase<T>::algo_struct -> init) : CRCbase<T>::algo_struct -> init;
+    CRCbase<T> :: crc_val = CRCbase<T> :: algo_struct -> refIn ? CRCbase<T> :: reverseBits(CRCbase<T> :: algo_struct -> init) : CRCbase<T> :: algo_struct -> init;
 }
 
 template<typename T>
 inline void FastCRC<T> :: updateCRC(uint8_t* s) {
-    if(CRCbase<T>::algo_struct -> refOut)
-        CRCbase<T>::crc_val = ((CRCbase<T>::crc_val >> 8) & M1) ^ table[(CRCbase<T>::crc_val & 0xff) ^ *s];
+    if(CRCbase<T> :: algo_struct -> refOut)
+        CRCbase<T> :: crc_val = ((CRCbase<T> :: crc_val >> 8) & M1) ^ table[(CRCbase<T> :: crc_val & 0xff) ^ *s];
     else
-        CRCbase<T>::crc_val = ((CRCbase<T>::crc_val << 8) & M2) ^ table[((CRCbase<T>::crc_val >> hbits) & 0xff) ^ *s];
+        CRCbase<T> :: crc_val = ((CRCbase<T> :: crc_val << 8) & M2) ^ table[((CRCbase<T> :: crc_val >> hbits) & 0xff) ^ *s];
 }
 
 template<typename T>
 inline T FastCRC<T> :: fetchCRC() {
-    CRCbase<T>::crc_val ^= CRCbase<T>::algo_struct -> xorOut;
-    return CRCbase<T>::crc_val;
+    CRCbase<T> :: crc_val ^= CRCbase<T> :: algo_struct -> xorOut;
+    return CRCbase<T> :: crc_val;
 }
 
 template<typename T>
 T FastCRC<T> :: getCRC(uint8_t* s, size_t length) {
     initCRC();
     for(size_t i = 0; i < length; ++i)
-        updateCRC(s+i);
+        updateCRC(s + i);
     return fetchCRC();
 }

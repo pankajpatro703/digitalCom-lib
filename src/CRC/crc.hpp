@@ -1,12 +1,13 @@
 /**
- * @file         crc.hpp
- * @brief        Cyclic Redundancy Check - CRC calculator
- * @author       pankajpatro703
- * @date         27.07.2020      //created
- * @date         11.08.2020      //modified
- * @version      1.0
- * @copyright    Copyright (C) 2020 Pankajkumar Patro
- * @license      GNU Lesser GPL v3.0+
+ * @file        crc.hpp
+ * @brief       Cyclic Redundancy Check - CRC calculator
+ * @author      pankajpatro703
+ * @date        27.07.2020      //created
+ * @date        20.08.2020      //modified
+ * @version     1.0
+ * @copyright   Copyright (C) 2020 Pankajkumar Patro
+ * @license     GNU Lesser GPL v3.0+
+ * @see         https://github.com/pankajpatro703/digitalCom-lib
  *
  * crc.hpp - Header file to calculate 8,16,32,64-bit CRC Hash value.
  *
