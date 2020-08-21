@@ -4,7 +4,7 @@
  * @author      pankajpatro703
  * @date        27.07.2020      //created
  * @date        20.08.2020      //modified
- * @version     1.0
+ * @version     1.0.0
  * @copyright   Copyright (C) 2020 Pankajkumar Patro
  * @license     GNU Lesser GPL v3.0+
  * @see         https://github.com/pankajpatro703/digitalCom-lib
@@ -29,14 +29,14 @@
  * along with digitalCom-lib.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef CRC_H
-#define CRC_H
+#ifndef CRC_HPP
+#define CRC_HPP
 
 #include "stdlib.h"
 #include "stdint.h"
 
 /**
- * @struct crc
+ * @struct crcparam
  * @brief Defines the parameters required for algorithms.
  *
  * Example:
