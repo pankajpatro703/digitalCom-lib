@@ -1,0 +1,81 @@
+import sys, os
+sys.path.append(os.path.abspath('../../src/CRC'))
+import crc
+
+message = input('Enter the message: ') #'Hello. This is the message.'
+
+#message = [0x48,0x65,0x6c,0x6c,0x6f]         #for hex values
+#for i in range(len(message)):
+    #message[i]=chr(message[i])
+
+#8-bit CRC applications
+crcobj = crc.FastCRC(crc.CRC8_AUTOSAR);        print('8-bit AUTOSAR CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_BLUETOOTH);      print('8-bit BLUETOOTH CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_CDMA2000);       print('8-bit CDMA2000 CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_DARC);           print('8-bit DARC CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_DVB_S2);         print('8-bit DVB-S2 CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_EBU);            print('8-bit EBU CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_GSM_A);          print('8-bit GSM-A CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_GSM_B);          print('8-bit GSM-B CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_ITU);            print('8-bit ITU CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_I_CODE);         print('8-bit I-CODE CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_LTE);            print('8-bit LTE CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_MAXIM);          print('8-bit MAXIM CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_MIFARE_MAD);     print('8-bit MIFARE-MAD CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_NRSC_5);         print('8-bit NRSC-5 CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_OPENSAFETY);     print('8-bit OPENSAFETY CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_ROHC);           print('8-bit ROHC CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_SAE_J1850);      print('8-bit SAE-J1850 CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_SMBUS);          print('8-bit SMBUS CRC of the message is', format(crcobj.getCRC(message),'02x'))
+crcobj = crc.FastCRC(crc.CRC8_WCDMA);          print('8-bit WCDMA CRC of the message is', format(crcobj.getCRC(message),'02x'))
+
+#16-bit CRC applications
+crcobj = crc.FastCRC(crc.CRC16_A);             print('16-bit A CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_ARC);           print('16-bit ARC CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_AUG_CCITT);     print('16-bit AUG-CCITT CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_B);             print('16-bit B CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_CCITT_FALSE);   print('16-bit CCITT-FALSE CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_CDMA2000);      print('16-bit CDMA2000 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_CMS);           print('16-bit CMS CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_DDS_110);       print('16-bit DDS-110 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_DECT_R);        print('16-bit DECT-R CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_DECT_X);        print('16-bit DECT-X CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_DNP);           print('16-bit DNP CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_EN_13757);      print('16-bit EN-13757 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_GENIBUS);       print('16-bit GENIBUS CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_GSM);           print('16-bit GSM CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_KERMIT);        print('16-bit KERMIT CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_LJ1200);        print('16-bit LJ1200 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_MAXIM);         print('16-bit MAXIM CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_MCRF4XX);       print('16-bit MCRF4XX CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_MODBUS);        print('16-bit MODBUS CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_NRSC_5);        print('16-bit NRSC-5 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_OPENSAFETY_A);  print('16-bit OPENSAFETY-A CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_OPENSAFETY_B);  print('16-bit OPENSAFETY-B CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_PROFIBUS);      print('16-bit PROFIBUS CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_RIELLO);        print('16-bit RIELLO CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_T10_DIF);       print('16-bit T10-DIF CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_TELEDISK);      print('16-bit TELEDISK CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_TMS37157);      print('16-bit TMS37157 CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_UMTS);          print('16-bit UMTS CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_USB);           print('16-bit USB CRC of the message is', format(crcobj.getCRC(message),'04x'))
+crcobj = crc.FastCRC(crc.CRC16_XMODEM);        print('16-bit XMODEM CRC of the message is', format(crcobj.getCRC(message),'04x'))
+
+#32-bit CRC applications
+crcobj = crc.FastCRC(crc.CRC32_ADCCP);         print('32-bit ADCCP CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_AUTOSAR);       print('32-bit AUTOSAR CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_BZIP2);         print('32-bit BZIP2 CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_C);             print('32-bit C CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_CD_ROM_EDC);    print('32-bit CD-ROM-EDC CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_D);             print('32-bit D CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_JAMCRC);        print('32-bit JAMCRC CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_MPEG2);         print('32-bit MPEG2 CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_POSIX);         print('32-bit POSIX CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_Q);             print('32-bit Q CRC of the message is', format(crcobj.getCRC(message),'08x'))
+crcobj = crc.FastCRC(crc.CRC32_XFER);          print('32-bit XFER CRC of the message is', format(crcobj.getCRC(message),'08x'))
+
+#64-bit CRC applications
+crcobj = crc.FastCRC(crc.CRC64_ECMA_182);      print('64-bit ECMA-182 CRC of the message is', format(crcobj.getCRC(message),'016x'))
+crcobj = crc.FastCRC(crc.CRC64_GO_ISO);        print('64-bit GO-ISO CRC of the message is', format(crcobj.getCRC(message),'016x'))
+crcobj = crc.FastCRC(crc.CRC64_WE);            print('64-bit WE CRC of the message is', format(crcobj.getCRC(message),'016x'))
+crcobj = crc.FastCRC(crc.CRC64_XZ);            print('64-bit XZ CRC of the message is', format(crcobj.getCRC(message),'016x'))

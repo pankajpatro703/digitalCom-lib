@@ -6,11 +6,11 @@ Release details for CRC library.
 * Calculation Type : LiteCRC and FastCRC            
 * API : Common(getCRC) and Manual(initCRC, updateCRC, fetchCRC)           
 
-+ TODO          
+## TODO          
 * Algorithms : Intermediate CRC             
 * Calculation Type : Fast2CRC               
-* API : File calculation(FileCRC) and Error check(checkCRC)        
-* Exception Handling
+* API : File calculation(FileCRC) and Error check(checkCRC)          
+* Exception Handling    
 
 # C++           
 * Files: (crc.hpp, crc.inl, crc.cpp)      
@@ -20,3 +20,6 @@ Release details for CRC library.
 * Files: (crc.h, crcLite.c), (crc.h, crcFast.c)         
 * v1.0.0    Date : 27/08/2020        
 
+# Python    
+* Files: (crc.py)    
+* v1.0.0    Date : 05/09/2020    
