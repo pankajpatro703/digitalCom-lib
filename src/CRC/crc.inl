@@ -3,8 +3,8 @@
  * @brief       Cyclic Redundancy Check - CRC calculator
  * @author      pankajpatro703
  * @date        27.07.2020      //created
- * @date        20.08.2020      //modified
- * @version     1.0.0
+ * @date        12.09.2020      //modified
+ * @version     1.0.1
  * @copyright   Copyright (C) 2020 Pankajkumar Patro
  * @license     GNU Lesser GPL v3.0+
  * @see         https://github.com/pankajpatro703/digitalCom-lib
