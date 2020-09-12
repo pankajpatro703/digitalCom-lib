@@ -3,8 +3,8 @@
  * @brief       Cyclic Redundancy Check - CRC calculator
  * @author      pankajpatro703
  * @date        08.03.2020      //created
- * @date        27.08.2020      //modified
- * @version     1.0.0
+ * @date        12.09.2020      //modified
+ * @version     1.0.1
  * @copyright   Copyright (C) 2020 Pankajkumar Patro
  * @license     GNU Lesser GPL v3.0+
  * @see         https://github.com/pankajpatro703/digitalCom-lib
@@ -51,6 +51,7 @@ typedef struct {
     bool refIn, refOut;
     uint8_t xorOut;
 } crcparam8;
+
 /**
  * @struct crcparam16
  * @brief Defines the parameters required for 16-bit algorithms.
@@ -66,6 +67,7 @@ typedef struct {
     bool refIn, refOut;
     uint16_t xorOut;
 } crcparam16;
+
 /**
  * @struct crcparam32
  * @brief Defines the parameters required for 32-bit algorithms.
@@ -81,6 +83,7 @@ typedef struct {
     bool refIn, refOut;
     uint32_t xorOut;
 } crcparam32;
+
 /**
  * @struct crcparam64
  * @brief Defines the parameters required for 64-bit algorithms.

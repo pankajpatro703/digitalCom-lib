@@ -3,8 +3,8 @@
  * @brief       Cyclic Redundancy Check - CRC calculator
  * @author      pankajpatro703
  * @date        08.03.2020      //created
- * @date        27.08.2020      //modified
- * @version     1.0.0
+ * @date        12.09.2020      //modified
+ * @version     1.0.1
  * @copyright   Copyright (C) 2020 Pankajkumar Patro
  * @license     GNU Lesser GPL v3.0+
  * @see         https://github.com/pankajpatro703/digitalCom-lib
@@ -209,25 +209,25 @@ uint64_t fetchCRC64(uint64_t crc_val, crcparam64* paramlist) {
 
 uint8_t getCRC8(uint8_t* s, crcparam8* paramlist, size_t length) {
     uint8_t crc_val = initCRC8(paramlist);
-    for(size_t i =0 ; i < length; ++i)
-        crc_val = updateCRC8(s+i, crc_val, paramlist);
+    for(size_t i = 0; i < length; ++i)
+        crc_val = updateCRC8(s + i, crc_val, paramlist);
     return fetchCRC8(crc_val, paramlist);
 }
 uint16_t getCRC16(uint8_t* s, crcparam16* paramlist, size_t length) {
     uint16_t crc_val = initCRC16(paramlist);
-    for(size_t i =0 ; i < length; ++i)
-        crc_val = updateCRC16(s+i, crc_val, paramlist);
+    for(size_t i = 0; i < length; ++i)
+        crc_val = updateCRC16(s + i, crc_val, paramlist);
     return fetchCRC16(crc_val, paramlist);
 }
 uint32_t getCRC32(uint8_t* s, crcparam32* paramlist, size_t length) {
     uint32_t crc_val = initCRC32(paramlist);
-    for(size_t i =0 ; i < length; ++i)
-        crc_val = updateCRC32(s+i, crc_val, paramlist);
+    for(size_t i = 0; i < length; ++i)
+        crc_val = updateCRC32(s + i, crc_val, paramlist);
     return fetchCRC32(crc_val, paramlist);
 }
 uint64_t getCRC64(uint8_t* s, crcparam64* paramlist, size_t length) {
     uint64_t crc_val = initCRC64(paramlist);
-    for(size_t i =0 ; i < length; ++i)
-        crc_val = updateCRC64(s+i, crc_val, paramlist);
+    for(size_t i = 0; i < length; ++i)
+        crc_val = updateCRC64(s + i, crc_val, paramlist);
     return fetchCRC64(crc_val, paramlist);
 }
