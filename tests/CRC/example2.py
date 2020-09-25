@@ -5,8 +5,7 @@ import crc
 message = input('Enter the message: ') #'Hello. This is the message.'
 
 #message = [0x48,0x65,0x6c,0x6c,0x6f]         #for hex values
-#for i in range(len(message)):
-    #message[i]=chr(message[i])
+#message = [chr(b) for b in message]
 
 #8-bit CRC applications
 crcobj = crc.FastCRC(crc.CRC8_AUTOSAR);        print('8-bit AUTOSAR CRC of the message is', format(crcobj.getCRC(message),'02x'))
