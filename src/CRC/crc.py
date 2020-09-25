@@ -3,8 +3,8 @@
  # @brief       Cyclic Redundancy Check - CRC calculator
  # @author      pankajpatro703
  # @date        14.04.2020      //created
- # @date        05.09.2020      //modified
- # @version     1.0.0
+ # @date        25.09.2020      //modified
+ # @version     1.0.1
  # @copyright   Copyright (C) 2020 Pankajkumar Patro
  # @license     GNU Lesser GPL v3.0+
  # @see         https://github.com/pankajpatro703/digitalCom-lib
@@ -102,7 +102,6 @@ class CRCbase(object):
      @class CRCbase
      @brief Base class for CRC calculation algorithms
     '''
-
     def __init__(self, paramlist):
         '''
          @brief Initializes algorithm reference.
@@ -133,7 +132,6 @@ class LiteCRC(CRCbase):
      @class LiteCRC
      @brief Class for low memory CRC calculation algorithms.
     '''
-
     def __init__(self, paramlist):
         '''
          @brief Initializes algorithm reference.
@@ -158,7 +156,7 @@ class LiteCRC(CRCbase):
          new_crc.initCRC()
          @endcode
         '''
-        self.crc_val = self._CRCbase__algo_dict['init']
+        self.__crc_val = self._CRCbase__algo_dict['init']
 
     def updateCRC(self, byte):
         '''
@@ -172,12 +170,12 @@ class LiteCRC(CRCbase):
          new_crc.updateCRC(data)
          @endcode
         '''
-        self.crc_val ^= self._CRCbase__reverseBits(byte) if self._CRCbase__algo_dict['refIn'] else byte << (self._CRCbase__nbits - 8)
+        self.__crc_val ^= self._CRCbase__reverseBits(byte) if self._CRCbase__algo_dict['refIn'] else byte << (self._CRCbase__nbits - 8)
         for i in range(8):
-            test = (self.crc_val & (0x01 << (self._CRCbase__nbits - 1))) != 0
-            self.crc_val = (self.crc_val << 1) & ((0x01 << (self._CRCbase__nbits)) - 1)
+            test = (self.__crc_val & (0x01 << (self._CRCbase__nbits - 1))) != 0
+            self.__crc_val = (self.__crc_val << 1) & ((0x01 << (self._CRCbase__nbits)) - 1)
             if(test):
-                self.crc_val ^= self._CRCbase__algo_dict['poly']
+                self.__crc_val ^= self._CRCbase__algo_dict['poly']
 
     def fetchCRC(self):
         '''
@@ -191,9 +189,9 @@ class LiteCRC(CRCbase):
          @endcode
         '''
         if(self._CRCbase__algo_dict['refOut']):
-            self.crc_val = self._CRCbase__reverseBits(self.crc_val)
-        self.crc_val ^= self._CRCbase__algo_dict['xorOut']
-        return self.crc_val
+            self.__crc_val = self._CRCbase__reverseBits(self.__crc_val)
+        self.__crc_val ^= self._CRCbase__algo_dict['xorOut']
+        return self.__crc_val
 
     def getCRC(self, data):
         '''
@@ -218,7 +216,6 @@ class FastCRC(CRCbase):
      @class FastCRC
      @brief Class for fast CRC calculation algorithms.
     '''
-
     def __init__(self, paramlist):
         '''
          @brief Initializes algorithm reference.
@@ -265,7 +262,7 @@ class FastCRC(CRCbase):
          new_crc.initCRC()
          @endcode
         '''
-        self.crc_val = self._CRCbase__reverseBits(self._CRCbase__algo_dict['init']) if self._CRCbase__algo_dict['refIn'] else self._CRCbase__algo_dict['init']
+        self.__crc_val = self._CRCbase__reverseBits(self._CRCbase__algo_dict['init']) if self._CRCbase__algo_dict['refIn'] else self._CRCbase__algo_dict['init']
 
     def updateCRC(self, byte):
         '''
@@ -280,9 +277,9 @@ class FastCRC(CRCbase):
          @endcode
         '''
         if(self._CRCbase__algo_dict['refOut']):
-            self.crc_val = ((self.crc_val >> 8) & self.__M1) ^ self.__table[(self.crc_val & 0xff) ^ byte]
+            self.__crc_val = ((self.__crc_val >> 8) & self.__M1) ^ self.__table[(self.__crc_val & 0xff) ^ byte]
         else:
-            self.crc_val = ((self.crc_val << 8) & self.__M2) ^ self.__table[((self.crc_val >> self.__hbits) & 0xff) ^ byte]
+            self.__crc_val = ((self.__crc_val << 8) & self.__M2) ^ self.__table[((self.__crc_val >> self.__hbits) & 0xff) ^ byte]
 
     def fetchCRC(self):
         '''
@@ -295,8 +292,8 @@ class FastCRC(CRCbase):
          crcval = new_crc.fetchCRC()
          @endcode
         '''
-        self.crc_val ^= self._CRCbase__algo_dict['xorOut']
-        return self.crc_val
+        self.__crc_val ^= self._CRCbase__algo_dict['xorOut']
+        return self.__crc_val
 
     def getCRC(self, data):
         '''
