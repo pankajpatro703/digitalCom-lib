@@ -3,8 +3,8 @@
  # @brief       Cyclic Redundancy Check - CRC calculator
  # @author      pankajpatro703
  # @date        14.04.2020      //created
- # @date        25.09.2020      //modified
- # @version     1.0.1
+ # @date        20.12.2020      //modified
+ # @version     1.0.2
  # @copyright   Copyright (C) 2020 Pankajkumar Patro
  # @license     GNU Lesser GPL v3.0+
  # @see         https://github.com/pankajpatro703/digitalCom-lib
@@ -98,12 +98,11 @@ CRC64_WE            = {'poly':0x42F0E1EBA9EA3693, 'init':0xFFFFFFFFFFFFFFFF, 're
 CRC64_XZ            = {'poly':0x42F0E1EBA9EA3693, 'init':0xFFFFFFFFFFFFFFFF, 'refIn':True,  'refOut':True,  'xorOut':0xFFFFFFFFFFFFFFFF, 'size':64}     ###! GO-ECMA
 
 class CRCbase(object):
-    '''
-     @class CRCbase
+    '''!
      @brief Base class for CRC calculation algorithms
     '''
     def __init__(self, paramlist):
-        '''
+        '''!
          @brief Initializes algorithm reference.
          @param paramlist crc parameter dict
 
@@ -118,7 +117,7 @@ class CRCbase(object):
         self.__nbits = self.__algo_dict['size']
 
     def __reverseBits(self, num):
-        '''
+        '''!
          @brief Calculates the number obtained by reversing the bit sequence of input number.
          @param num original n-bit integer to be reversed
          @return reversed n-bit integer value
@@ -128,12 +127,11 @@ class CRCbase(object):
         return int(revs, 2)
 
 class LiteCRC(CRCbase):
-    '''
-     @class LiteCRC
+    '''!
      @brief Class for low memory CRC calculation algorithms.
     '''
     def __init__(self, paramlist):
-        '''
+        '''!
          @brief Initializes algorithm reference.
          @param paramlist crc parameter dict
 
@@ -147,7 +145,7 @@ class LiteCRC(CRCbase):
         super(LiteCRC,self).__init__(paramlist)
 
     def initCRC(self):
-        '''
+        '''!
          @brief Initializes the crc value as per the algorithm parameter.
 
          Example:
@@ -159,7 +157,7 @@ class LiteCRC(CRCbase):
         self.__crc_val = self._CRCbase__algo_dict['init']
 
     def updateCRC(self, byte):
-        '''
+        '''!
          @brief Updates the crc value for each new byte of input.
          @param byte data byte
 
@@ -178,7 +176,7 @@ class LiteCRC(CRCbase):
                 self.__crc_val ^= self._CRCbase__algo_dict['poly']
 
     def fetchCRC(self):
-        '''
+        '''!
          @brief Obtains the final crc value after post-processing.
          @return calculated crc value
 
@@ -194,7 +192,7 @@ class LiteCRC(CRCbase):
         return self.__crc_val
 
     def getCRC(self, data):
-        '''
+        '''!
          @brief Calculates the crc value for given input data.
          @param data byte array on which the CRC is to be calculated
          @return calculated CRC value
@@ -212,12 +210,11 @@ class LiteCRC(CRCbase):
         return self.fetchCRC()
 
 class FastCRC(CRCbase):
-    '''
-     @class FastCRC
+    '''!
      @brief Class for fast CRC calculation algorithms.
     '''
     def __init__(self, paramlist):
-        '''
+        '''!
          @brief Initializes algorithm reference.
          @param paramlist crc parameter dict
 
@@ -253,7 +250,7 @@ class FastCRC(CRCbase):
                         self.__table[i] = (self.__table[i] << 1) & ((0x01 << (self._CRCbase__nbits)) - 1)
 
     def initCRC(self):
-        '''
+        '''!
          @brief Initializes the crc value as per the algorithm parameter.
 
          Example:
@@ -265,7 +262,7 @@ class FastCRC(CRCbase):
         self.__crc_val = self._CRCbase__reverseBits(self._CRCbase__algo_dict['init']) if self._CRCbase__algo_dict['refIn'] else self._CRCbase__algo_dict['init']
 
     def updateCRC(self, byte):
-        '''
+        '''!
          @brief Updates the crc value for each new byte of input.
          @param byte data byte
 
@@ -282,7 +279,7 @@ class FastCRC(CRCbase):
             self.__crc_val = ((self.__crc_val << 8) & self.__M2) ^ self.__table[((self.__crc_val >> self.__hbits) & 0xff) ^ byte]
 
     def fetchCRC(self):
-        '''
+        '''!
          @brief Obtains the final crc value after post-processing.
          @return calculated crc value
 
@@ -296,7 +293,7 @@ class FastCRC(CRCbase):
         return self.__crc_val
 
     def getCRC(self, data):
-        '''
+        '''!
          @brief Calculates the crc value for given input data.
          @param data byte array on which the CRC is to be calculated
          @return calculated CRC value
