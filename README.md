@@ -1,15 +1,22 @@
 # digitalCom-lib
-Library for implementation of Data Compression, Encryption and Error Correction Algorithms used in Digital Communication using both hardware description and software programming languages.
+Library for implementation of **`Data Compression`**, **`Encryption`** and **`Error Detection & Correction`** algorithms used in **`Digital Communication`** using both hardware description and software programming languages.  
 
-# Languages for implementation
-*  Python (HLL implementation and testing)         
-*  C, Rust (efficient resource usage)          
-*  Verilog, VHDL (hardware description)       
+## Purpose
+To act as a bridge between academic and professional projects alike.
 
-# Error detection and correction
-*  CRC      
-reference: http://reveng.sourceforge.net/crc-catalogue/all.htm    
+## Languages for implementation
+* `C`, `C++`, `Rust` (System)  
+* `Python` (Interpreted)  
+* `Verilog` (Hardware Described)  
 
-# Encryption
-*  S-DES            
-reference: http://mercury.webster.edu/aleshunas/COSC%205130/G-SDES.pdf    
+## Released algorithms
+|**Sr. No.**|**Algorithm**|**System**|**Interpreted**|**Hardware Described**|  
+|--|--|--|--|--|  
+|1|[CRC](src/CRC)|`C` `C++`|`Python`|`-`|  
+
+## Contribution
+Contributions are currently not accepted until stabilized after release of `version 1.0`, however suggestions are always welcome.
+
+## License
+All the libraries are released under [Lesser GNU GPL 3.0+](COPYING.LESSER) license.  
+Refer: https://www.gnu.org/licenses/lgpl-3.0.en.html
