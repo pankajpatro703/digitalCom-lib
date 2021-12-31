@@ -3,9 +3,9 @@
  # @brief       Cyclic Redundancy Check - CRC calculator
  # @author      pankajpatro703
  # @date        14.04.2020      //created
- # @date        20.12.2020      //modified
+ # @date        31.12.2021      //modified
  # @version     1.0.2
- # @copyright   Copyright (C) 2020 Pankajkumar Patro
+ # @copyright   Copyright (C) 2020, 2021 Pankajkumar Patro
  # @license     GNU Lesser GPL v3.0+
  # @see         https://github.com/pankajpatro703/digitalCom-lib
  #
@@ -142,7 +142,7 @@ class LiteCRC(CRCbase):
          new_crc = crc.LiteCRC(CRC8_new)
          @endcode
         '''
-        super(LiteCRC,self).__init__(paramlist)
+        super(LiteCRC, self).__init__(paramlist)
 
     def initCRC(self):
         '''!
@@ -225,7 +225,7 @@ class FastCRC(CRCbase):
          new_crc = crc.FastCRC(CRC8_new)
          @endcode
         '''
-        super(FastCRC,self).__init__(paramlist)
+        super(FastCRC, self).__init__(paramlist)
         self.__hbits = self._CRCbase__nbits - 8
         self.__M1 = (0x01 << self.__hbits) - 1
         self.__M2 = ((0x01 << self._CRCbase__nbits) - 1) - 0xff
